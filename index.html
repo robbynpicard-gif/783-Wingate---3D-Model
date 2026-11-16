@@ -1,7 +1,8 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>783 Wingate Drive – Basement 3D Model</title>
+<title>783 Wingate Drive – 3D Model</title>
 <style>
 :root{--bg:#e9e6df;--fg:#2a2a28;--panel:#f6f4ef;--line:#c9c4b8;--acc:#9a4b1f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1d1b;--fg:#ecE8df;--panel:#2a2a27;--line:#4a4944;--acc:#e0935a}}
@@ -22,7 +23,7 @@ button:hover,button:focus-visible{border-color:var(--acc);outline:2px solid var(
 #pb h3{font-size:11px;margin:8px 0 2px;text-transform:uppercase;letter-spacing:.05em;color:var(--acc)}#pb input[type=range]{flex:1;min-width:0}
 </style></head><body>
 <canvas id="c"></canvas>
-<div class="bar"><h1>783 Wingate Drive: basement + main floor</h1>
+<div class="bar"><h1>783 Wingate Drive</h1>
 <button id="b1">Cutaway walls</button><button id="b2">Top view</button><button id="b3">Reset view</button><button id="b4">Hide main floor</button><button id="b5">Hide exterior</button></div>
 <div class="hint">Drag to orbit, scroll or pinch to zoom, right-drag to pan. Built from the listing floor plan (about 1,662 sq ft total, basement 47′ × 25′6″); fixture positions are approximate.</div>
 <div id="pn"><button id="tg">Controls</button><div id="pb"></div></div>
@@ -76,7 +77,7 @@ box(5.6,24,8,25.2,2,2.2,0x222);box(5.6,24,8,25.2,0,2,0x2a2a2a);
 // unfinished area: joists + beam + ducts
 const JO=[];for(let x=24;x<47;x+=1.33)JO.push(box(x,0,x+.15,x>29.3?19.5:25.8,7.25,7.85,0xc89a5a));
 box(23.6,12.8,47,13.3,6.75,7.25,0x7d8a8c);
-box(24,5.5,41,6.7,5.65,6.65,0x9ea3a3);box(24,3.9,41,5.3,5.65,6.65,0x9ea3a3);box(34,1,36,12.8,6.15,6.65,0xa4a8a8);
+const DU=[box(24,5.5,41,6.7,5.65,6.65,0x9ea3a3),box(24,3.9,41,5.3,5.65,6.65,0x9ea3a3),box(34,1,36,12.8,6.15,6.65,0xa4a8a8)];
 const cyl=(x,z,r,h,c)=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,20),mat(c));m.position.set(x,h/2,z);S.add(m)};
 cyl(35,13,.2,6.75,0xb19c78);cyl(39.5,6.9,.9,4.6,0x3f5566);
 box(41,6,43,7.8,0,4.6,0x7a8082);box(.25,1,.6,2.5,4,5.8,0x8a8a8a);
@@ -99,7 +100,7 @@ lab("Rec room|13'4 x 13'10",7,10.6);lab("Bedroom|13'4 x 7'9",7,21.6);lab("Hall|9
 lab("Bath|9'10 x 7'9",18.8,21.6);lab("Unfinished basement / laundry|47'0 x 25'6 overall",35,10,5);
 const bs=new THREE.Group(),bl=new THREE.Group();S.children.filter(c=>!c.isLight).forEach(c=>c.isSprite?bl.add(c):bs.add(c));S.add(bs,bl);const sw=new THREE.Group();ST.forEach(m=>sw.add(m));S.add(sw);
 // main floor (level at y=8, scaled from the main-floor plan)
-const mf=new THREE.Group(),mw=new THREE.Group(),ml=new THREE.Group();[mf,mw].forEach(g=>{g.position.y=8;S.add(g)});S.add(ml);JO.forEach(m=>{mf.add(m);m.position.y-=8});
+const mf=new THREE.Group(),mw=new THREE.Group(),ml=new THREE.Group();[mf,mw].forEach(g=>{g.position.y=8;S.add(g)});S.add(ml);JO.concat(DU).forEach(m=>{mf.add(m);m.position.y-=8});
 const W0=walls;walls=mw;H=8;const IN=0xe3d6bf,MW=[3.2,6.8],WH={18.5:[3.6,6.5],27.4:[.4,7.5],13.4:[.4,7.5],1.1:[.4,7.5],4.4:[4.7,6.6],11:[3.6,6.5],3.5:[2.5,7.3],19.7:[2.8,6.6]},mwin=(a,b)=>[a,b,...(WH[a]||MW)],D2=[0,6.7];
 wall(0,0,47,0,IN,[[14,16.7,0,6.8],mwin(18.5,24.7),mwin(27.4,33.7)],.5);wall(47,0,47,19.5,IN,[mwin(13.4,18.3)],.5);
 wall(47,19.5,29.3,19.5,IN,[mwin(1.1,6.9),[14,17.2,0,6.8]],.5);wall(29.3,19.5,29.3,25.5,IN,0,.5);
@@ -126,8 +127,8 @@ B(35.8,.6,38,2.8,2.6,0x8a6a42);B(38.2,.4,40.2,1.6,2.4,0x2a2a2a);B(40.4,.6,42.6,2
 [[30.2,1.8],[30.2,6.6],[27.8,4.2],[32.6,4.2]].forEach(([x,z])=>B(x-.7,z-.7,x+.7,z+.7,1.6,0x3a1f14));box(30.2,17.2,33,19.2,.03,.07,0x77777c,mf);
 [[2.4,.2,2.3],[.3,2.4,0]].forEach(([r,h,y])=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(r*.8,r*.8,h||.2,24),mat(0x5a2e22));m.position.set(30.2,y+(h||.2)/2,4.2);mf.add(m)});
 // bedrooms + bath
-B(4.2,.3,9.3,7,1.8,0xd8dde8);B(4.2,.3,9.3,.5,3.2,0x555555);B(12.3,1.2,13.8,6.9,3,0x5a1f1a);B(13.75,1.6,13.85,6.5,2.5,0xcfe0e8,3.5);B(1.2,8.3,4.2,9.9,4.6,0x5a1f1a);
-B(7,16.2,10,23,1.8,0xf2f2f2);B(.4,22.8,2.6,25.2,1.8,0x222222);B(14.4,22.2,20.5,25.3,1.8,0xf2f2f2);B(20.4,22.2,20.55,25.3,3.2,0xc8a64a);B(19.6,20.8,20.7,22,1.9,0x222222);
+B(.5,3,6.9,8.1,1.8,0xd8dde8);B(.4,3,.6,8.1,3.2,0x555555);B(12.3,3.6,13.8,9.4,3,0x5a1f1a);B(13.75,4,13.85,9,2.5,0xcfe0e8,3.5);B(1.2,8.3,4.2,9.9,4.6,0x5a1f1a);
+B(7.1,17.8,10.2,24.6,1.8,0xf2f2f2);B(.4,22.8,2.6,25.2,1.8,0x222222);B(14.4,22.2,20.5,25.3,1.8,0xf2f2f2);B(20.4,22.2,20.55,25.3,3.2,0xc8a64a);B(19.6,20.8,20.7,22,1.9,0x222222);
 B(26.3,20.8,28.9,25.2,1.8,0xf4f4f4);B(21.2,20.6,22.8,22.2,2.8,0x4a2a22);B(21,23.2,22.8,24.5,1.4,0xf6f6f6);
 const n0=S.children.length;
 lab("Primary bedroom|13'4 x 12'6",7,5,12);lab("Bedroom|10'2 x 12'9",5,19,12);lab("Bedroom|10'4 x 8'11",15.6,21,12);lab("Bath|7'11 x 8'11",25,23,12);
@@ -147,15 +148,15 @@ pk(0,0,47,0,[win(22.7,26.2),win(26.8,30.5),win(37.7,41.4),win(42,45.7)],0,-1);pk
 pk(29.3,25.8,0,25.8,[win(10.6,14.3),win(20.1,23.9)],0,1);pk(0,25.8,0,0,[win(3.6,7.9),win(18.3,21.4)],-1,0)}walls=W1;H=8;
 eg=rf;E(46.9,3.2,48.3,8.9,23.6,24,0x6a3a2a);
 function gable(x0,z0,x1,z1,axis,span,ov){const hw=span/2+ov,rise=hw*.33,sh=new THREE.Shape();sh.moveTo(-hw,0);sh.lineTo(hw,0);sh.lineTo(0,rise);sh.closePath();
- const len=(axis=='x'?x1-x0:z1-z0)+2*ov,m=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:len,bevelEnabled:false}),[mat(0xe8e4d4),mat(0x4a4440)]);
+ const len=(axis=='x'?x1-x0:z1-z0)+2*ov,m=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:len,bevelEnabled:false}),[mat(0xe8e4d4),mat(0x6a5648)]);
  if(axis=='x'){m.rotation.y=Math.PI/2;m.position.set(x0-ov,16,(z0+z1)/2)}else m.position.set((x0+x1)/2,16,z0-ov);rf.add(m)}
 gable(0,0,29.3,25.5,'x',25.5,1.2);gable(29.3,0,47,21.5,'x',21.5,1.2);
 // carport (provisional), porch + steps (provisional), deck, utilities, shrubs
-eg=cp;const sr=(x0,x1,z0,z1)=>{const zc=(z0+z1)/2,m=new THREE.Mesh(new THREE.BoxGeometry(x1-x0,.3,(z1-z0)*1.024),mat(0x6e675f));m.position.set((x0+x1)/2,15.6-(zc-25.5)*.22,zc);m.rotation.x=.2165;cp.add(m)};
-sr(10,29.3,25.5,35);sr(29.3,36.5,22.7,35);[10.7,21,28.5,35.5].forEach(x=>E(x,34.5,x+.3,34.8,5.6,13.6,0x6b4a3a));
+eg=cp;const sr=(x0,x1,z0,z1,c)=>{const zc=(z0+z1)/2,m=new THREE.Mesh(new THREE.BoxGeometry(x1-x0,.3,(z1-z0)*1.024),mat(c));m.position.set((x0+x1)/2,15.6-(zc-25.5)*.22,zc);m.rotation.x=.2165;cp.add(m)};
+sr(10,29.3,25.5,35,0x6b5446);sr(29.3,36.5,22.7,35,0x8a5a44);[10.7,21,28.5,35.5].forEach(x=>E(x,34.5,x+.3,34.8,5.6,13.6,0x6b4a3a));
 eg=fn;const fc=(a,b,c,d,h,k,o)=>{const m=E(a,b,c,d,5.6,5.6+h,k);if(o)m.material=new THREE.MeshLambertMaterial({color:k,transparent:true,opacity:o})};
-fc(-20.7,-6.6,61,-6.4,6,0xc9b48a);fc(-20.8,-6.5,-20.6,36.5,4,0x9a9a94,.4);fc(-20.7,36.4,61,36.6,4,0x9a9a94,.4);
-E(-20.5,-2.4,-11.5,5.1,5.6,13.1,0xe4dccb);E(-20.7,-2.6,-11.3,5.3,13.1,13.4,0x8a8a84);
+fc(-20.7,-6.6,61,-6.4,6.4,0xcdb98f,.8);fc(-20.8,-6.5,-20.6,36.5,4,0x9a9a94,.4);fc(-20.7,36.4,61,36.6,4,0x9a9a94,.4);
+E(-20.6,-3.9,-13.4,3.8,5.6,12.6,0xe4dccb);E(-20.8,-4.1,-13.2,4,12.6,12.9,0x8a8a84);
 eg=cp;E(29.3,19.5,33.2,26.05,6.8,7.8,0xa8a39a);E(29.3,19.5,33.2,26.05,7.8,7.88,0x9c5a46);E(33.2,19.5,34.3,26.05,6.95,7.1,0x9c5a46);E(34.3,19.5,35.4,26.05,6.25,6.4,0x9c5a46);
 {const EL=t=>[33.2+2.6*Math.cos(t),6.8*Math.sin(t)],ts=(a,b)=>{const r=[];for(let i=0;i<=8;i++)r.push(EL(a+(b-a)*i/8));return r},
 mass=(pts,g)=>{const sh=new THREE.Shape(pts.map(p=>new THREE.Vector2(p[0],p[1]))),m=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:6.55,bevelEnabled:false}),mat(0xb4afa6));m.position.z=19.5;g.add(m)};
@@ -167,11 +168,11 @@ E(34.8,25.3,35.1,25.6,6.4,15.6,0x6b4a3a);E(32.2,24.4,33.1,25.3,7.88,8.6,0x7a4a30
 E(47.35,12.2,47.65,12.5,5.6,16,0x5a3a2e);E(36.3,19.6,36.6,19.9,5.6,16,0x5a3a2e);
 eg=yd;{const sh=new THREE.Shape(),P=[[19.4,0],[47,0],[47,23],[52.6,23],[53,16],[53,8],[52.6,0],[50,-3.5],[44,-4.6],[36,-4.3],[28,-3.9],[19.4,-3.6]];P.forEach((p,i)=>i?sh.lineTo(p[0],p[1]):sh.moveTo(p[0],p[1]));
 const m=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:.08,bevelEnabled:false}),mat(0xa07060));m.rotation.x=Math.PI/2;m.position.y=5.68;yd.add(m)}
-E(47.2,9.2,49.2,11.4,5.6,9.6,0x7a4a30);
+E(47.2,.5,48.8,3.1,5.6,9.4,0x7a4a30);
 eg=dk;E(-.3,-5.8,19.4,0,7.5,7.9,0xd8cdb6);E(-.3,-5.8,19.4,-5.65,7.9,10.6,0xe4dcc8);E(-.3,-5.8,-.15,-3.95,7.9,10.6,0xe4dcc8);[0,1,2].forEach(i=>E(-1.3-i,-3.9,-.3-i,-.3,5.6,7.15-i*.75,0xd8cdb6));
 [0,1,2].forEach(i=>E(19.4+i*1.1,-2,20.5+i*1.1,0,5.6,7.1-i*.7,0xd8cdb6));
-E(36,-3.5,38.4,-1,5.6,8.1,0x888888);E(23.6,-5,26.1,-2.5,5.6,8.4,0xe6e0cf);
-[[54.6,18.5,3.2],[54.2,11.5,2.7]].forEach(([x,z,r])=>{const m=new THREE.Mesh(new THREE.SphereGeometry(r,16,12),mat(0x3f6b35));m.position.set(x,5.6+r*.8,z);yd.add(m)});
+E(28.6,-3,31.2,-.5,5.6,8.4,0x8a8d8f);E(19.8,-5.2,23.1,-2.2,5.6,8.4,0xe9e6dc);
+box(-.6,25.9,2.6,27.7,5.6,8.8,0xcdd2c6,yd);[[49.8,22.4,2.2],[53.6,13.5,2.8]].forEach(([x,z,r])=>{const m=new THREE.Mesh(new THREE.SphereGeometry(r,16,12),mat(0x3f6b35));m.position.set(x,5.6+r*.8,z);yd.add(m)});
 b5.onclick=()=>{ex.visible=!ex.visible;b5.textContent=ex.visible?"Hide exterior":"Show exterior"};
 // orbit
 const T=new THREE.Vector3(23.5,0,13);let th,ph,d;const reset=()=>{th=.4;ph=.95;d=85;T.set(23.5,5,13)};reset();
@@ -200,3 +201,5 @@ H3('Adjust');const sl=(n,a,b,v,f)=>{const l=mkE('label'),i=mkE('input');i.type='
 sl('Wall height',.2,1,1,v=>{walls.scale.y=mw.scale.y=ms.scale.y=v});sl('Explode',0,12,0,v=>{[mf,mw,ms].forEach(g=>g.position.y=8+v);ml.position.y=v;rf.position.y=v*2});sl('Sun',0,6.28,.9,a=>dl.position.set(Math.cos(a)*40,50,Math.sin(a)*40));
 (function loop(){bgc();place();R.render(S,cam);requestAnimationFrame(loop)})();
 </script></body></html>
+
+</body></html>
