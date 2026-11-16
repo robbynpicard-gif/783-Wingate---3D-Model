@@ -112,7 +112,7 @@ cyl(35,13,.2,6.75,0xb19c78);cyl(45,4.5,.85,4.7,0x3f5566);
 {const fl=new THREE.Mesh(new THREE.CylinderGeometry(.2,.2,2.4,16),mat(0x9a9ea0));fl.position.set(45,5.9,4.5);S.add(fl);
  [[.45,.35],[-.45,.35]].forEach(([dz,dx])=>{const q=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,1.3,12),mat(0xb87333));q.position.set(45+dx,5.4,4.5+dz);S.add(q)});
  lab("Water heater|gas tank",45,4.5,7.4);lab("Furnace|forced air",42.1,7,5.3)}
-box(41.15,6.05,43.05,7.95,0,4.6,0x7a8082);box(.25,1,.6,2.5,4,5.8,0x8a8a8a);
+box(41.15,6.05,43.05,7.95,0,4.6,0x7a8082);box(1,.25,2.5,.6,4,5.8,0x8a8a8a);box(1.1,.6,2.4,.64,4.1,5.7,0x6e7274);box(1.3,.64,2.2,.68,4.3,5.5,0x9a9e9f);box(.25,1,.6,2.5,4,5.8,0xdcdcd6);box(.6,1.1,.64,2.4,4.2,5.6,0xc4c7c4);box(.64,1.4,.68,2.1,4.5,5.3,0xe8e8e2);box(.64,1.5,.7,2.0,5.0,5.2,0xe06a1c);
 box(23.9,.4,25.4,1.9,2.2,2.5,0xf4f4f0);box(23.9,.4,25.4,1.9,0,2.2,0xe8e8e4);
 FU.push(box(33,.8,37.5,2.6,2.4,2.55,0xf2f0e4),box(33.4,.9,33.6,2.5,0,2.4,0xf2f0e4),box(36.9,.9,37.1,2.5,0,2.4,0xf2f0e4),box(37.8,.4,39.4,.6,.5,4.5,0xe8e4dc));
 const gl=(a,b,c,d,y0,y1)=>{const m=box(a,b,c,d,y0,y1,0x9fd0e8);m.material=new THREE.MeshLambertMaterial({color:0xeef2f2,transparent:true,opacity:.6})};
@@ -122,7 +122,7 @@ FU.push(box(24.3,17.6,27.3,19.1,0,3,0xc7955a));cyl(28.6,5.3,.3,.03,0x222222);
 wall(29.3,25.8,33.2,25.8,CON,0,.5);box(29.3,19.5,36.2,25.8,0,.05,0xc4b393);
 for(let i=0;i<4;i++)box(30.2,19.8,34.4,20.6,.8+i*1.5,.9+i*1.5,0xe9e6dc);[30.2,33.7].forEach(x=>box(x,19.8,x+.7,19.9,0,5,0xe9e6dc));
 box(19.6,23.8,23.4,25.5,0,7,0xe6dfd0,walls);
-lab("Cold storage|curved east wall",32,22.5,3.5);lab("Electrical panel|end of hallway",5,1.9,6.6);
+lab("Cold storage|curved east wall",32,22.5,3.5);lab("Generac panel|transfer switch",4.5,1.9,6.6);lab("Electrical panel|east wall",4.5,1.0,5.2);
 // labels
 function lab(t,x,z,y){const c=document.createElement('canvas');c.width=512;c.height=128;const g=c.getContext('2d');
  g.fillStyle='rgba(20,20,18,.5)';g.fillRect(0,20,512,88);g.fillStyle='#fff';g.font='bold 34px Georgia';g.textAlign='center';
